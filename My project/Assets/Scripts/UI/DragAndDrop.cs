@@ -8,6 +8,9 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IDragHandler, IBe
     private RectTransform _rectTransform;
     private CanvasGroup _canvasGroup;
     private Vector2 _initialPosition;
+    private bool _onPointedDown = false;
+
+    public bool GetOnPointedDown { get { return _onPointedDown; } }
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +21,8 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IDragHandler, IBe
     public void OnPointerDown(PointerEventData eventData)
     {
         _initialPosition = _rectTransform.anchoredPosition;
+        _onPointedDown = true;
+
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -35,9 +40,9 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IDragHandler, IBe
     {
         _canvasGroup.blocksRaycasts = true;
         _canvasGroup.alpha = 1f;
+        _onPointedDown = false;
     }
 
-   
 
     
 

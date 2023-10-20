@@ -17,7 +17,13 @@ public class DropSlot : MonoBehaviour, IDropHandler
     {
         if (eventData.pointerDrag != null)
         {
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = _rectTransform.anchoredPosition;
+            RectTransform newRectTransform = eventData.pointerDrag.GetComponent<RectTransform>();
+            newRectTransform.localPosition = _rectTransform.localPosition;
+            if (newRectTransform.parent != _rectTransform.parent)
+            {
+                newRectTransform.SetParent(_rectTransform.parent);
+            }
+
         }
          
     }

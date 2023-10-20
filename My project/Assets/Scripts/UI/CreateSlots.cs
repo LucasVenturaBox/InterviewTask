@@ -12,7 +12,10 @@ public class CreateSlots : MonoBehaviour
     private Vector2 _slotSize;
     private int _xSlots;
     private int _ySlots;
-    private GameObject[] _slots;
+    private List<GameObject> _slots = new List<GameObject>();
+    
+
+    public List<GameObject> GetSlots { get { return _slots; } }
 
     private void Awake()
     {
@@ -25,7 +28,7 @@ public class CreateSlots : MonoBehaviour
         CreateInventorySlots();
     }
 
-    private void CreateInventorySlots()
+    public void CreateInventorySlots()
     {
         _inventorySize = new Vector2(_rectTransform.rect.width, _rectTransform.rect.height);
 
@@ -73,8 +76,9 @@ public class CreateSlots : MonoBehaviour
             for (int x = 0; x < _xSlots; x++)
             {
                 GameObject newSlot = Instantiate(_slot, _rectTransform);
-                newSlot.GetComponent<RectTransform>().anchoredPosition = new Vector2(x * slotAndBorderAlongX + slotAndBorderAlongX - _inventorySize.y * inventoryRatio ,y * slotAndBorderAlongY - _borderSize.y - _inventorySize.y );
-                _slots[x] = newSlot;
+                newSlot.GetComponent<RectTransform>().localPosition = new Vector2(x * slotAndBorderAlongX + slotAndBorderAlongX - _inventorySize.y * inventoryRatio ,y * slotAndBorderAlongY - _borderSize.y - _inventorySize.y );
+                _slots.Add(newSlot);
+                
             }
         }
 

@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
         {
             Movement();
             Interact();
+            Profile();
         }
         else if (_inputActionMaps[1].enabled)
         {
@@ -69,9 +70,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void NavigateUI()
+    private void Profile()
     {
+        bool isOpenningProfile = _gameplayInputActions[2].triggered;
 
+        if (isOpenningProfile)
+        {
+            UIManager.instance.OpenProfile();
+
+        }
     }
 
     #endregion

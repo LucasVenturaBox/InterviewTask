@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,7 +8,9 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float _movementSpeed = 1f;
     [SerializeField] private float _interactionRadius = 1;
-    private InputAction[] _inputActions;
+    private PlayerInput _playerInput;
+    private InputAction[] _gameplayInputActions;
+    private InputActionMap [] _inputActionMaps;
 
     #region Unity Methods
     private void OnEnable()
@@ -17,20 +20,23 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        _inputActions = GetComponent<PlayerInput>().actions.actionMaps[0].actions.ToArray();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+        _playerInput = GetComponent<PlayerInput>();
+        _inputActionMaps = _playerInput.actions.actionMaps.ToArray();
+        _gameplayInputActions = _inputActionMaps[0].actions.ToArray();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Movement();
-        Interact();
+        if (_inputActionMaps[0].enabled)
+        {
+            Movement();
+            Interact();
+        }
+        else if (_inputActionMaps[1].enabled)
+        {
+
+        }
     }
 
     private void OnDisable()
@@ -39,16 +45,18 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    #region Actions
+
     private void Movement()
     {
-        Vector2 direction = _inputActions[0].ReadValue<Vector2>();
+        Vector2 direction = _gameplayInputActions[0].ReadValue<Vector2>();
 
         transform.position += new Vector3 (direction.x, direction.y, 0) * _movementSpeed * Time.deltaTime;
     }
 
     private void Interact()
     {
-        bool isInteracting = _inputActions[1].triggered;
+        bool isInteracting = _gameplayInputActions[1].triggered;
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, _interactionRadius, Vector2.zero, 1f, 6*32);
         
 
@@ -60,4 +68,27 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    private void NavigateUI()
+    {
+
+    }
+
+    #endregion
+    public void ChangeActionMaps(bool isGameplay)
+    {
+            if(isGameplay)
+            {
+                _inputActionMaps[1].Disable();
+                _inputActionMaps[0].Enable();
+            }
+            else
+            {
+                _inputActionMaps[0].Disable();
+                _inputActionMaps[1].Enable();
+            }
+    }
+
+    
+    
 }

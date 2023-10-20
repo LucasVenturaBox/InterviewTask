@@ -268,6 +268,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "3e2ac178-89e3-431d-88a0-40d44c666483",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "b329f53b-e719-45ee-8518-175588373675",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0d88a029-c377-4472-aa50-38443415114e",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

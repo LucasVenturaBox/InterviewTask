@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float _movementSpeed = 1f;
+    [SerializeField] private float _interactionRadius = 1;
     private InputAction[] _inputActions;
 
     #region Unity Methods
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Movement();
+        Interact();
     }
 
     private void OnDisable()
@@ -41,11 +43,21 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 direction = _inputActions[0].ReadValue<Vector2>();
 
-        transform.position += new Vector3 (direction.x, direction.y, 0) * _movementSpeed;
+        transform.position += new Vector3 (direction.x, direction.y, 0) * _movementSpeed * Time.deltaTime;
     }
 
     private void Interact()
     {
+        bool isInteracting = _inputActions[1].triggered;
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, _interactionRadius, Vector2.zero, 1f, 6*32);
+        
 
+        if (isInteracting && hit == true)
+        { 
+            if (hit.transform.GetComponent<IInteractable>() != null)
+            {
+               hit.transform.GetComponent<IInteractable>().Interaction();
+            }
+        }
     }
 }

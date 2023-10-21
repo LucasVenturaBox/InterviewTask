@@ -16,12 +16,16 @@ public class UIManager : MonoBehaviour
     private GameObject _playerProfile;
     private GameObject _playerHUD;
     private GameObject _shopKeeperUI;
-
-
-
-
+    private GameObject _buyScreen;
 
     public float GetCanvasScaleFactor { get { return _canvas.scaleFactor; } }
+
+    public GameObject GetPlayerProfile { get { return _playerProfile; } }
+    public GameObject GetPlayerBag { get { return _playerBag; } }
+    public GameObject GetShopKeeperUI { get { return _shopKeeperUI; } }
+
+    public GameObject GetCurrentItem { get { return _currentItem; } }
+
     private void Awake()
     {
         if (instance == null)
@@ -37,23 +41,27 @@ public class UIManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "Test")
         {
+            _player = GameManager.instance.GetPlayer;
             _canvas = FindObjectOfType<Canvas>();
-            Transform playerParentUI = _canvas.transform.GetChild(2);
-            _currentItem = _canvas.transform.GetChild(0).gameObject;
-            _playerBag = playerParentUI.GetChild(0).gameObject;
-            _playerHUD = playerParentUI.GetChild(1).gameObject;
-            _playerProfile = playerParentUI.GetChild(2).gameObject;
+            Transform playerParentUI = _canvas.transform.GetChild(0);
+            _playerProfile = playerParentUI.GetChild(0).gameObject;
+            _playerBag = playerParentUI.GetChild(1).gameObject;
+            _playerHUD = playerParentUI.GetChild(2).gameObject;
             _shopKeeperUI = _canvas.transform.GetChild(1).gameObject;
+            _currentItem = _canvas.transform.GetChild(2).gameObject;
+            _buyScreen = _canvas.transform.GetChild(3).gameObject;
+
         }
     }
 
     private void Start()
     {
-        _player = GameManager.instance.GetPlayer;
+        
         _playerBag.SetActive(false);
         _playerProfile.SetActive(false);
         _shopKeeperUI.SetActive(false);
         _currentItem.SetActive(false);
+        _buyScreen.SetActive(false);
     }
 
     public void UpdateCoinDisplay()
@@ -68,6 +76,7 @@ public class UIManager : MonoBehaviour
         _playerBag.SetActive(true);
         _playerProfile.SetActive(true);
         _shopKeeperUI.SetActive(true);
+        _buyScreen.SetActive(true);
         
     }
 
@@ -78,25 +87,16 @@ public class UIManager : MonoBehaviour
         _playerProfile.SetActive(true);
     }
 
-    public void CurrentItem(string name, Sprite image, string stat, string price)
-    {
-        //_currentItem = _shopUI.transform.GetChild(0).gameObject;
-        _currentItem.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = name;
-        _currentItem.transform.GetChild(1).GetComponent<Image>().sprite = image;
-        _currentItem.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = stat;
-        _currentItem.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = price;
-    }
+ 
 
-    public void Buy()
-    {
-
-    }
-
-    public void CloseShop()
+    public void CloseUI()
     {
         _player.GetComponent<PlayerController>().ChangeActionMaps(true);
-        _playerBag.SetActive(true);
-        _playerProfile.SetActive(true);
+        _playerBag.SetActive(false);
+        _playerProfile.SetActive(false);
+        _shopKeeperUI.SetActive(false);
+        _currentItem.SetActive(false);
+        _buyScreen.SetActive(false);
     }
     
 }

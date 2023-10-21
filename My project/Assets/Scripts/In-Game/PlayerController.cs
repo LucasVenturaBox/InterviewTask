@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
         _gameplayInputActions = _inputActionMaps[0].actions.ToArray();
     }
 
+    
+
     // Update is called once per frame
     void Update()
     {
@@ -85,7 +87,7 @@ public class PlayerController : MonoBehaviour
     public void ChangeActionMaps(bool isGameplay)
     {
             if(isGameplay)
-            {
+            { 
                 _inputActionMaps[1].Disable();
                 _inputActionMaps[0].Enable();
             }

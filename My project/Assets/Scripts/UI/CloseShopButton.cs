@@ -14,6 +14,6 @@ public class CloseShopButton : MonoBehaviour
 
     private void Start()
     {
-        _button.onClick.AddListener(UIManager.instance.CloseShop);
+        _button.onClick.AddListener(UIManager.instance.CloseUI);
     }
 }

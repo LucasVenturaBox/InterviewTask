@@ -25,18 +25,7 @@ public class Item : MonoBehaviour
         _image.sprite = itemData.GetSprite;
     }
 
-    private void Update()
-    {
-        if(_dragAndDrop.GetOnPointedDown)
-        {
-            UIManager.instance.CurrentItem(itemData.GetName, itemData.GetSprite, itemData.GetStat.ToString(), itemData.GetPrice.ToString());
-        }
-
-        //if(!_locked) 
-        //{
-        //    GameManager.instance.GetPlayer
-        //}
-    }
+    
 
     
 }

@@ -5,8 +5,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    [SerializeField] private GameObject _player;
+    private GameObject _player;
     private int _playerCoins;
+
+
 
     public int GetPlayerCoins { get { return _playerCoins; } }
     public GameObject GetPlayer { get { return _player; } }
@@ -23,12 +25,13 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        
+        _player = FindObjectOfType<PlayerController>().gameObject;        
     }
 
     public void IncrementRandomCoins(int lowestAmount, int highestAmount)
     {
         _playerCoins += Random.Range(lowestAmount, highestAmount);
+        Debug.Log("IncrementedRandomCoins");
         UIManager.instance.UpdateCoinDisplay();
     }
 

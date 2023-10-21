@@ -13,19 +13,29 @@ public class CreateSlots : MonoBehaviour
     private int _xSlots;
     private int _ySlots;
     private List<GameObject> _slots = new List<GameObject>();
+    private List<GameObject> _freeSlots = new List<GameObject>();
+    private PlaceItems _placeItems;
     
 
-    public List<GameObject> GetSlots { get { return _slots; } }
+    public List<GameObject> GetFreeSlots { get { return _freeSlots; } }
 
     private void Awake()
     {
         _rectTransform = GetComponent<RectTransform>();
         _slotRectTransform = _slot.GetComponent<RectTransform>();
+        
     }
 
     private void Start()
     {
         CreateInventorySlots();
+        if (GetComponent<PlaceItems>() != null)
+        {
+            _placeItems = GetComponent<PlaceItems>();
+            _placeItems.PopulateSlots(_slots.ToArray());
+
+        }
+
     }
 
     public void CreateInventorySlots()
@@ -82,5 +92,18 @@ public class CreateSlots : MonoBehaviour
             }
         }
 
+    }
+
+    public List<GameObject> CheckFreeSlots()
+    {
+        _freeSlots.Clear();
+        for (int i = 0; i < _slots.Count; i++)
+        {
+            if (_slots[i].GetComponent<DropSlot>().GetIsFree)
+            {
+                _freeSlots.Add(_slots[i]);
+            }
+        }
+        return _freeSlots;
     }
 }

@@ -8,9 +8,9 @@ using UnityEngine.UI;
 public class DropSlot : MonoBehaviour
 {
     private ItemSO _itemData;
-    private bool _isFree = true;
     private Button _button;
     private string _tag;
+    private bool _isFree = true;
 
     public bool GetIsFree { get { return _isFree; } }
 
@@ -40,23 +40,23 @@ public class DropSlot : MonoBehaviour
     public void ClearSlot()
     {
         _button.image.sprite = null;
-        _button.onClick.RemoveListener(UpdateCurrentItem);
+        _itemData = null;
+        _tag = string.Empty;
+
         _isFree = true;
+        ClearCurrentItem();
+
     }
 
     private void UpdateCurrentItem()
-    {
-        if (!_isFree)
-        {
+    { 
             UIManager.instance.GetCurrentItem.GetComponent<CurrentItem>().UpdateCurrentItem(_itemData, _tag, gameObject);
-            Debug.Log("SaySomething");
-        }
-        else
-        {
-            Debug.Log("It is an empty slot");
-        }
+    }
 
-        
+    private void ClearCurrentItem()
+    {
+        UIManager.instance.GetCurrentItem.GetComponent<CurrentItem>().ClearCurrentItem();
+
     }
 
 

@@ -39,15 +39,27 @@ public class CurrentItem : MonoBehaviour
 
     public void UpdateCurrentItem(ItemSO itemData, string tag, GameObject currentSlot)
     {
-        _itemData = itemData;
-        _tag = tag;
-        _currentSlot = currentSlot;
-        //_currentItem = _shopUI.transform.GetChild(0).gameObject;
-        gameObject.SetActive(true);
-        gameObject.tag = _tag;
-        _name.text = _itemData.GetName;
-        _image.sprite = _itemData.GetSprite;
-        _stat.text = _itemData.GetStat.ToString();
-        _price.text = _itemData.GetPrice.ToString();
+        if (itemData != null && tag != null && currentSlot != null)
+        {
+
+
+            _itemData = itemData;
+            _tag = tag;
+            _currentSlot = currentSlot;
+            //_currentItem = _shopUI.transform.GetChild(0).gameObject;
+            gameObject.SetActive(true);
+            gameObject.tag = _tag;
+            _name.text = _itemData.GetName;
+            _image.sprite = _itemData.GetSprite;
+            _stat.text = _itemData.GetStat.ToString();
+            _price.text = _itemData.GetPrice.ToString();
+        }
+    }
+
+    public void ClearCurrentItem()
+    {
+        _itemData = null;
+        _tag = null;
+        _currentSlot = null;
     }
 }

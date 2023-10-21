@@ -19,10 +19,8 @@ public class Buy : MonoBehaviour
 
     private void BuyItem()
     {
-        Debug.Log("it says it is null");
         if (UIManager.instance.GetCurrentItem != null)
         {
-            Debug.Log("Something is happening on the BuyItem method");
             CurrentItem currentItem = UIManager.instance.GetCurrentItem.GetComponent<CurrentItem>();
             ItemSO itemData = currentItem.GetItemData;
             GameObject currentSlot = currentItem.GetCurrentSlot;

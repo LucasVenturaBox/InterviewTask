@@ -13,6 +13,8 @@ public class ItemSO : ScriptableObject
     [SerializeField] private AnimationClip[] _animations;
     [SerializeField] private int  _price = 0;
     [SerializeField] private float _stat = 0;
+    [Range(0, 4)]
+    [SerializeField] private int _typeOfItem;
 
     public string GetName{ get { return _name;} }
     public Image GetImage{ get { return _image;  } }
@@ -20,5 +22,6 @@ public class ItemSO : ScriptableObject
     public AnimationClip[] GetAnimations { get { return _animations;  } }
     public int GetPrice { get { return _price;  } }
     public float GetStat { get { return _stat;  } }
+    public int GetTypeOfItem { get { return _typeOfItem; } }
 
 }

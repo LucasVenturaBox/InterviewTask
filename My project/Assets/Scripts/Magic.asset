@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e85336903763dbd45a65eb293ded9f69, type: 3}
-  m_Name: Sword
+  m_Name: Magic
   m_EditorClassIdentifier: 
-  _name: Sword
+  _name: Magic
   _image: {fileID: 0}
-  _sprite: {fileID: 21300000, guid: a8166ea434d337349818825bff42d2f6, type: 3}
+  _sprite: {fileID: 21300000, guid: 24726326f0d24dc41875ec34f94e95b2, type: 3}
   _animations: []
-  _price: 10
-  _stat: 5
-  _typeOfItem: 3
+  _price: 5
+  _stat: 10
+  _typeOfItem: 4

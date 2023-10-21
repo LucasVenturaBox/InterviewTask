@@ -16,7 +16,7 @@ public class CreateSlots : MonoBehaviour
     private List<GameObject> _freeSlots = new List<GameObject>();
     private PlaceItems _placeItems;
     
-
+    
     public List<GameObject> GetFreeSlots { get { return _freeSlots; } }
 
     private void Awake()

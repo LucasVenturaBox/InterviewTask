@@ -66,8 +66,14 @@ public class UIManager : MonoBehaviour
 
     public void UpdateCoinDisplay()
     {
-        GameObject coinDisplay = _playerHUD.transform.GetChild(1).gameObject;
-        coinDisplay.GetComponent<TextMeshProUGUI>().text = GameManager.instance.GetPlayerCoins.ToString();
+        Transform coinDisplay = _playerHUD.transform.GetChild(1);
+        coinDisplay.GetChild(1).GetComponent<TextMeshProUGUI>().text = GameManager.instance.GetPlayerCoins.ToString();
+    }
+
+    public void UpdateStatsDisplay()
+    {
+        Transform statsDisplay = _playerHUD.transform.GetChild(0);
+        statsDisplay.GetChild(1).GetComponent<TextMeshProUGUI>().text = GameManager.instance.GetPlayerStats.ToString();
     }
 
     public void OpenShop()

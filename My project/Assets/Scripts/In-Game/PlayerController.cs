@@ -11,6 +11,11 @@ public class PlayerController : MonoBehaviour
     private PlayerInput _playerInput;
     private InputAction[] _gameplayInputActions;
     private InputActionMap [] _inputActionMaps;
+    private Vector2 _currentDirection;
+    private bool _currentInteract;
+
+    public Vector2 GetCurrentDirection { get { return _currentDirection; } }
+    public bool GetCurrentInteract { get { return _currentInteract; } }
 
     #region Unity Methods
     private void OnEnable()
@@ -53,6 +58,7 @@ public class PlayerController : MonoBehaviour
     private void Movement()
     {
         Vector2 direction = _gameplayInputActions[0].ReadValue<Vector2>();
+        _currentDirection = _gameplayInputActions[0].ReadValue<Vector2>();
 
         transform.position += new Vector3 (direction.x, direction.y, 0) * _movementSpeed * Time.deltaTime;
     }
@@ -60,11 +66,13 @@ public class PlayerController : MonoBehaviour
     private void Interact()
     {
         bool isInteracting = _gameplayInputActions[1].triggered;
-        RaycastHit2D hit = Physics2D.CircleCast(transform.position, _interactionRadius, Vector2.zero, 1f, 6*32);
         
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, _interactionRadius, Vector2.zero, 1f, 6*32);
+        _currentInteract = _gameplayInputActions[1].triggered;
+
 
         if (isInteracting && hit == true)
-        { 
+        {
             if (hit.transform.GetComponent<IInteractable>() != null)
             {
                hit.transform.GetComponent<IInteractable>().Interaction();

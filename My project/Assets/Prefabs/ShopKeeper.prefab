@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5872273076506451117}
   - component: {fileID: 4378107188572804604}
   - component: {fileID: 1632192382651966622}
+  - component: {fileID: 8205521189370536656}
   m_Layer: 6
   m_Name: ShopKeeper
   m_TagString: Untagged
@@ -171,4 +172,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b77a5262ddfe4564083819428479bbb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shopUI: {fileID: 6468589903750828020, guid: d1c67374e3873a148974bbdde7488cc3, type: 3}
+--- !u!95 &8205521189370536656
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143976709435902975}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ef4c5886a5200c449957aabbbe807928, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
